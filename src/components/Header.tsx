@@ -7,7 +7,7 @@ const Header: React.FC = () => {
       <div className="container-custom">
         <div className="max-w-3xl">
           <h1 className="text-3xl md:text-5xl font-bold leading-tight mb-4">
-            🏠 Looking to Rent – 1BHK/2BHK Flat near Netcore Cloud Thane Office
+            🏠 Looking for Rental – 1BHK/2BHK Flat near Netcore Cloud Thane Office
           </h1>
           <p className="text-xl md:text-2xl opacity-90 font-light mb-4">
             Move in within 2 months
