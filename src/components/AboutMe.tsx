@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { cn } from '@/lib/utils';
 import AnimatedSection from './AnimatedSection';
@@ -21,7 +20,7 @@ const AboutMe: React.FC = () => {
             <div className="w-full md:w-2/3">
               <h2 className="section-heading">About Me</h2>
               <p className="text-lg text-gray-700 leading-relaxed mb-4">
-                Hi, I'm <span className="highlighted-text font-bold">Udayan Das Chaudhury</span>, Product Lead at Netcore Cloud. 
+                Hi, I'm <span className="highlighted-text font-bold">Udayan Das Chowdhury</span>, Product Lead at Netcore Cloud. 
                 I build and scale a comprehensive B2B SaaS platform for marketers—full stack of services to empower businesses.
               </p>
             </div>

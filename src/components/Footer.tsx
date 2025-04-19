@@ -16,7 +16,7 @@ const Footer: React.FC = () => {
           <div>
             <p className="text-lg font-medium mb-2">Move in within 2 months</p>
             <p className="text-gray-400">
-              &copy; {currentYear} Udayan Das Chaudhury. All rights reserved.
+              &copy; {currentYear} Udayan Das Chowdhury. All rights reserved.
             </p>
           </div>
           

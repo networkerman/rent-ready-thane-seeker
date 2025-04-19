@@ -1,20 +1,19 @@
-
 import React, { useEffect, useRef, useState } from 'react';
 import AnimatedSection from './AnimatedSection';
 import { Button } from '@/components/ui/button';
 import { MapPin } from 'lucide-react';
 
+const GOOGLE_MAPS_API_KEY = 'AIzaSyAKzuxjJpbSE_U5EqygjhNN83AKKntRASE';
+
 const InteractiveMap: React.FC = () => {
   const [mapApiLoaded, setMapApiLoaded] = useState(false);
   const mapRef = useRef<HTMLDivElement>(null);
   const mapInstanceRef = useRef<google.maps.Map | null>(null);
-  const [mapApiKey, setMapApiKey] = useState<string>('');
-  const [showInput, setShowInput] = useState(true);
 
   useEffect(() => {
-    if (mapApiKey && !mapApiLoaded) {
+    if (!mapApiLoaded) {
       const script = document.createElement('script');
-      script.src = `https://maps.googleapis.com/maps/api/js?key=${mapApiKey}&callback=initMap&v=weekly`;
+      script.src = `https://maps.googleapis.com/maps/api/js?key=${GOOGLE_MAPS_API_KEY}&callback=initMap&v=weekly`;
       script.defer = true;
       script.async = true;
       
@@ -33,7 +32,7 @@ const InteractiveMap: React.FC = () => {
     
     // Initialize map once API is loaded
     if (mapApiLoaded && mapRef.current) {
-      const netcoreLocation = { lat: 19.1982, lng: 72.9617 }; // Netcore office in Thane
+      const netcoreLocation = { lat: 19.1982, lng: 72.9617 }; // Netcore Cloud Thane Office
       
       const mapOptions: google.maps.MapOptions = {
         center: netcoreLocation,
@@ -54,11 +53,11 @@ const InteractiveMap: React.FC = () => {
       const map = new google.maps.Map(mapRef.current, mapOptions);
       mapInstanceRef.current = map;
       
-      // Add marker for Netcore office
+      // Add marker for Netcore Cloud Thane Office
       new google.maps.Marker({
         position: netcoreLocation,
         map: map,
-        title: "Netcore Cloud Office",
+        title: "Netcore Cloud Thane Office",
         icon: {
           path: google.maps.SymbolPath.CIRCLE,
           fillColor: "#1E3A8A",
@@ -152,15 +151,7 @@ const InteractiveMap: React.FC = () => {
         });
       });
     }
-  }, [mapApiLoaded, mapApiKey]);
-
-  const handleKeySubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    const formData = new FormData(e.currentTarget);
-    const key = formData.get('apiKey') as string;
-    setMapApiKey(key);
-    setShowInput(false);
-  };
+  }, [mapApiLoaded]);
 
   return (
     <section className="section bg-white" id="map">
@@ -171,31 +162,10 @@ const InteractiveMap: React.FC = () => {
             Explore the preferred neighborhoods in Thane. Hover over the shaded regions to see more details.
           </p>
           
-          {showInput ? (
-            <div className="mb-8 p-6 border border-dashed border-gray-300 rounded-lg">
-              <h3 className="text-lg font-medium mb-4">Enter Google Maps API Key</h3>
-              <form onSubmit={handleKeySubmit} className="flex flex-col sm:flex-row gap-4">
-                <input 
-                  type="text" 
-                  name="apiKey"
-                  placeholder="Paste your Google Maps API key here" 
-                  className="form-input flex-grow"
-                  required
-                />
-                <Button type="submit" className="btn-primary whitespace-nowrap">
-                  Load Map
-                </Button>
-              </form>
-              <p className="text-sm text-gray-500 mt-3">
-                To get a Google Maps API key, visit the <a href="https://developers.google.com/maps/documentation/javascript/get-api-key" target="_blank" rel="noopener noreferrer" className="text-rental-blue underline">Google Cloud Platform Console</a>
-              </p>
-            </div>
-          ) : null}
-          
           <div 
-            className={`map-container relative h-[500px] ${!mapApiLoaded || !mapApiKey ? 'bg-gray-100 flex items-center justify-center' : ''}`}
+            className={`map-container relative h-[500px] ${!mapApiLoaded ? 'bg-gray-100 flex items-center justify-center' : ''}`}
           >
-            {!mapApiLoaded && !showInput ? (
+            {!mapApiLoaded ? (
               <div className="absolute inset-0 flex items-center justify-center">
                 <div className="text-center">
                   <div className="w-12 h-12 border-4 border-rental-blue border-t-transparent rounded-full animate-spin mx-auto mb-4"></div>
@@ -209,15 +179,6 @@ const InteractiveMap: React.FC = () => {
               className="w-full h-full"
               style={{ display: mapApiLoaded ? 'block' : 'none' }}
             ></div>
-            
-            {!mapApiKey && !showInput ? (
-              <div className="absolute inset-0 flex items-center justify-center bg-gray-100">
-                <Button onClick={() => setShowInput(true)} className="btn-primary">
-                  <MapPin size={20} />
-                  Enter API Key
-                </Button>
-              </div>
-            ) : null}
           </div>
           
           <div className="mt-4 text-sm text-gray-500">

@@ -1,4 +1,3 @@
-
 import React from 'react';
 import AnimatedSection from './AnimatedSection';
 import { MapPin } from 'lucide-react';
@@ -19,7 +18,7 @@ const RentalRequirements: React.FC = () => {
             >
               <MapPin className="mt-1 flex-shrink-0" />
               <span className="underline underline-offset-4">
-                Netcore Cloud Pvt Ltd, 8th Floor, A Wing, Lodha Supremus II, Road No. 22, Wagle Industrial Estate, Thane West, Maharashtra 400604
+                Netcore Cloud Thane Office, 8th Floor, A Wing, Lodha Supremus II, Road No. 22, Wagle Industrial Estate, Thane West, Maharashtra 400604
               </span>
             </a>
             
@@ -28,7 +27,7 @@ const RentalRequirements: React.FC = () => {
                 <strong>Budget:</strong> Up to ₹40,000/month
               </RequirementItem>
               <RequirementItem>
-                <strong>Notice Period Ends:</strong> 15 June 2025 (ready to move thereafter)
+                <strong>Notice Period Ends:</strong> 15 June 2025 (Need to move in Before that)
               </RequirementItem>
               <RequirementItem>
                 <strong>Preferred Areas:</strong> Vartak Nagar, Thane West, Mulund, and surrounding neighborhoods near the Netcore office
