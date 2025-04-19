@@ -4,6 +4,7 @@ import AnimatedSection from './AnimatedSection';
 import { Button } from '@/components/ui/button';
 import { toast } from 'sonner';
 import { Image, Upload } from 'lucide-react';
+import { supabase } from '@/integrations/supabase/client';
 
 interface UploadedFile {
   file: File;
@@ -60,10 +61,39 @@ const PhotoUpload: React.FC = () => {
     
     try {
       const formData = new FormData(e.currentTarget);
-      
-      // This is where you'd normally submit to a backend
-      // For now, we'll simulate submission with setTimeout
-      await new Promise((resolve) => setTimeout(resolve, 2000));
+      const photoUrls: string[] = [];
+
+      // Upload photos to Supabase Storage
+      for (const file of uploadedFiles) {
+        const fileExt = file.file.name.split('.').pop();
+        const fileName = `${Math.random()}.${fileExt}`;
+        const filePath = `${fileName}`;
+
+        const { error: uploadError } = await supabase.storage
+          .from('property-photos')
+          .upload(filePath, file.file);
+
+        if (uploadError) throw uploadError;
+
+        const { data: { publicUrl } } = supabase.storage
+          .from('property-photos')
+          .getPublicUrl(filePath);
+
+        photoUrls.push(publicUrl);
+      }
+
+      // Submit listing to database
+      const { error: insertError } = await supabase
+        .from('property_listings')
+        .insert({
+          owner_name: formData.get('ownerName') as string,
+          contact_number: formData.get('contactNumber') as string,
+          property_address: formData.get('propertyAddress') as string,
+          expected_rent: Number(formData.get('expectedRent')),
+          photos: photoUrls
+        });
+
+      if (insertError) throw insertError;
       
       toast.success("Property details submitted successfully!");
       
