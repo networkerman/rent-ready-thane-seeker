@@ -1,3 +1,4 @@
+
 import type { Config } from "tailwindcss";
 
 export default {
@@ -12,9 +13,13 @@ export default {
 	theme: {
 		container: {
 			center: true,
-			padding: '2rem',
+			padding: '1.5rem',
 			screens: {
-				'2xl': '1400px'
+				'sm': '640px',
+				'md': '768px',
+				'lg': '1024px',
+				'xl': '1280px',
+				'2xl': '1536px',
 			}
 		},
 		extend: {
@@ -61,6 +66,14 @@ export default {
 					'accent-foreground': 'hsl(var(--sidebar-accent-foreground))',
 					border: 'hsl(var(--sidebar-border))',
 					ring: 'hsl(var(--sidebar-ring))'
+				},
+				rental: {
+					blue: '#1E3A8A',
+					lightBlue: '#3B82F6',
+					gray: '#6B7280',
+					lightGray: '#F3F4F6',
+					teal: '#0D9488',
+					red: '#EF4444',
 				}
 			},
 			borderRadius: {
@@ -84,12 +97,36 @@ export default {
 					to: {
 						height: '0'
 					}
+				},
+				'fade-in-up': {
+					'0%': {
+						opacity: '0',
+						transform: 'translateY(20px)'
+					},
+					'100%': {
+						opacity: '1',
+						transform: 'translateY(0)'
+					}
+				},
+				'fade-in': {
+					'0%': {
+						opacity: '0'
+					},
+					'100%': {
+						opacity: '1'
+					}
 				}
 			},
 			animation: {
 				'accordion-down': 'accordion-down 0.2s ease-out',
-				'accordion-up': 'accordion-up 0.2s ease-out'
-			}
+				'accordion-up': 'accordion-up 0.2s ease-out',
+				'fade-in-up': 'fade-in-up 0.5s ease-out forwards',
+				'fade-in': 'fade-in 0.5s ease-out forwards'
+			},
+			fontFamily: {
+				'sans': ['DM Sans', 'sans-serif'],
+				'heading': ['Montserrat', 'sans-serif'],
+			},
 		}
 	},
 	plugins: [require("tailwindcss-animate")],
