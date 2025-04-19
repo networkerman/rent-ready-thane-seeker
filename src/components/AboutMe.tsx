@@ -1,3 +1,4 @@
+
 import React from 'react';
 import { cn } from '@/lib/utils';
 import AnimatedSection from './AnimatedSection';
@@ -11,8 +12,8 @@ const AboutMe: React.FC = () => {
             <div className="w-full md:w-1/3 mb-6 md:mb-0">
               <div className="aspect-square rounded-full overflow-hidden bg-gray-200 border-4 border-rental-lightBlue/20">
                 <img 
-                  src="/placeholder.svg" 
-                  alt="Udayan Das Chaudhury"
+                  src="/lovable-uploads/5960aa52-29b9-41f9-9e61-e224efe21942.png"
+                  alt="Udayan Das Chowdhury and his wife"
                   className="w-full h-full object-cover" 
                 />
               </div>
